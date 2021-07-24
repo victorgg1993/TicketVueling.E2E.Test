@@ -12,9 +12,10 @@ namespace TicketVueling.E2E.Test
     {
         IWebDriver webDriver;
 
-        public Generics(IWebDriver webDriver)
+        public Generics(string url, IWebDriver webDriver)
         {
             this.webDriver = webDriver;
+            this.webDriver.Url = url;
         }
 
         public void AcceptCookies(int timeout)
