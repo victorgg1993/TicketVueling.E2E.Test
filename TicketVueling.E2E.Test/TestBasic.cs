@@ -1,6 +1,7 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
@@ -9,20 +10,21 @@ namespace TicketVueling.E2E.Test
     [TestClass]
     public class TestBasic
     {
-        string url = "https://tickets.vueling.com/";
+        static IWebDriver driver = new ChromeDriver();
+        static string url = "https://tickets.vueling.com/";
+
+        Generics basicTest = new Generics(url, driver);
 
         [ClassInitialize]
         public static void TestSetup(TestContext context)
         {
-
         }
 
         [TestMethod]
         public void RoundTripPurchase()
         {
-            Generics basicTest = new Generics(url, new FirefoxDriver());
             basicTest.AcceptCookies(2);
-            //select roundtrip option
+            basicTest.SelectTripOption(Generics.Trip.MULTIPLE, 4);
             //choose origin
             //choose destiny
             //choose init date
@@ -37,14 +39,17 @@ namespace TicketVueling.E2E.Test
             //Assert.IsTrue(1==2);
         }
 
-        [TestMethod]
-        public void OneWayPurchase()
-        {
-        }
+        /*
+            [TestMethod]
+            public void OneWayPurchase()
+            {
+            }
+        */
 
         [TestCleanup]
         public void TearDown()
         {
+            //basicTest.Close();
         }
     }
 }
