@@ -66,7 +66,7 @@ namespace TicketVueling.E2E.Test
             }
 
             this.ClickPlaceElement(id_origin_dest, timeout);
-            this.WriteBox(id_box, placeName, timeout);
+            this.WriteBox(id_box, placeName, 450);
         }
 
         public void Close()
@@ -88,7 +88,7 @@ namespace TicketVueling.E2E.Test
         {
             this.webDriver.FindElement(By.Id(id)).SendKeys(place);
 
-            Thread.Sleep(450); // pending to fix
+            Thread.Sleep(timeout); // pending to fix
 
             this.webDriver.FindElement(By.Id(id)).SendKeys(Keys.Tab);
         }
