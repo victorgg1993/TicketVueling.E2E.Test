@@ -16,8 +16,4 @@
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.4300" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Steps\" />
-  </ItemGroup>
-
 </Project>
