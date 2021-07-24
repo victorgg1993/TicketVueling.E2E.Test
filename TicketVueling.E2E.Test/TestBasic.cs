@@ -32,7 +32,7 @@ namespace TicketVueling.E2E.Test
             basicTest.ChooseDate(Generics.Place.ORIGIN, "22/09/21", 4);
             basicTest.ChooseDate(Generics.Place.DESTINATION, "25/09/21", 4);
             
-            //click search flies
+            //click search files
             //choose the first origin fly
             //choose the first destiny fly
             //select basic option
