@@ -27,8 +27,8 @@ namespace TicketVueling.E2E.Test
             basicTest.SelectTripOption(Generics.Trip.MULTIPLE, 4);
             basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
             basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
-            //choose init date
-            //choose end date
+            basicTest.ChooseDate(Generics.Date.INIT, "22/09/21", 4);
+            basicTest.ChooseDate(Generics.Date.END, "25/09/21", 4);
             //click search flies
             //choose the first origin fly
             //choose the first destiny fly
