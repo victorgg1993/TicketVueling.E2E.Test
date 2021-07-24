@@ -23,6 +23,7 @@ namespace TicketVueling.E2E.Test
             DESTINATION,
         };
 
+
         public Generics(string url, IWebDriver webDriver)
         {
             this.webDriver = webDriver;
@@ -67,6 +68,11 @@ namespace TicketVueling.E2E.Test
 
             this.ClickPlaceElement(id_origin_dest, timeout);
             this.WriteBox(id_box, placeName, 450);
+        }
+
+        public void ChooseDate(Place origin_destin, string date, int timeout)
+        {
+
         }
 
         public void Close()
