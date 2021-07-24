@@ -14,6 +14,7 @@ namespace TicketVueling.E2E.Test
         [ClassInitialize]
         public static void TestSetup(TestContext context)
         {
+
         }
 
         [TestMethod]
