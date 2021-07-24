@@ -25,8 +25,8 @@ namespace TicketVueling.E2E.Test
         {
             basicTest.AcceptCookies(2);
             basicTest.SelectTripOption(Generics.Trip.MULTIPLE, 4);
-            //choose origin
-            //choose destiny
+            basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
+            basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
             //choose init date
             //choose end date
             //click search flies
