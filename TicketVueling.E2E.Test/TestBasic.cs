@@ -33,7 +33,8 @@ namespace TicketVueling.E2E.Test
             basicTest.ChooseDate(Generics.Place.DESTINATION, "25/09/21", 4);
             
             basicTest.ClickSearchFlyButton(4);
-            
+
+            basicTest.fixPossibleUnavailableFly(4);
             //check if tickets are available, if not, keep pressing next day
 
             //choose the first origin fly
