@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -22,7 +25,6 @@ namespace TicketVueling.E2E.Test
             ORIGIN = 0,
             DESTINATION,
         };
-
 
         public Generics(string url, IWebDriver webDriver)
         {
@@ -72,7 +74,46 @@ namespace TicketVueling.E2E.Test
 
         public void ChooseDate(Place origin_destin, string date, int timeout)
         {
+            // temporary disabled, it just closes the date pop-up
+            // and picks the default dates
+            string id = "datePickerTitleCloseButton";
 
+            new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
+            .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(id)));
+
+            webDriver.FindElement(By.Id(id)).Click();
+
+            //string origin_table = $"/html/body/div[11]/div/div/div[1]/table";
+            // div / ui-datepicker-group ui-datepicker-group-first
+            // div / ui-datepicker-group ui-datepicker-group-last
+            //var _n = InitDebug();
+            //IWebElement dateTable = webDriver.FindElement((By.XPath(origin_table)));
+
+            // tmp
+            //List<IWebElement> lstTdElem = new List<IWebElement>(dateTable.FindElements(By.TagName("td")));
+            //List<String> textos_tmp = new List<String>();
+
+            //if (lstTdElem.Count > 0)
+            //{
+                //foreach (var elemTd in lstTdElem)
+                //{
+                //    var t = elemTd.Text + "/" + elemTd.GetAttribute("data-month") + "/" + elemTd.GetAttribute("data-year");
+                //
+                //    if (t.Length > 5)
+                //    {
+                //        textos_tmp.Add(t);
+                //    }
+                //}
+            //}
+
+            // check if dates exists
+            // if doesn't, pick some random one
+
+            // tmp
+            //foreach (var algo in textos_tmp)
+            //{
+                //var _nada = DebugWrite(algo + "\r\n");
+            //}
         }
 
         public void Close()
@@ -98,5 +139,17 @@ namespace TicketVueling.E2E.Test
 
             this.webDriver.FindElement(By.Id(id)).SendKeys(Keys.Tab);
         }
+
+
+        private static async Task InitDebug()
+        {
+            await File.WriteAllTextAsync("C:/Users/holacons/Documents/2_QA/1_Examens/finde1/TicketVueling.E2E.Test/salida.txt", "");
+        }
+
+        private static async Task DebugWrite(string texto)
+        {
+            await File.AppendAllTextAsync("C:/Users/holacons/Documents/2_QA/1_Examens/finde1/TicketVueling.E2E.Test/salida.txt", texto);
+        }
+
     }
 }
