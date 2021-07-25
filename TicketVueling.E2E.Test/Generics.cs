@@ -77,43 +77,17 @@ namespace TicketVueling.E2E.Test
             // temporary disabled, it just closes the date pop-up
             // and picks the default dates
             string id = "datePickerTitleCloseButton";
-
             new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
-            .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(id)));
+            .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+            .ElementIsVisible(By.Id(id)));
 
             webDriver.FindElement(By.Id(id)).Click();
+        }
 
-            //string origin_table = $"/html/body/div[11]/div/div/div[1]/table";
-            // div / ui-datepicker-group ui-datepicker-group-first
-            // div / ui-datepicker-group ui-datepicker-group-last
-            //var _n = InitDebug();
-            //IWebElement dateTable = webDriver.FindElement((By.XPath(origin_table)));
-
-            // tmp
-            //List<IWebElement> lstTdElem = new List<IWebElement>(dateTable.FindElements(By.TagName("td")));
-            //List<String> textos_tmp = new List<String>();
-
-            //if (lstTdElem.Count > 0)
-            //{
-                //foreach (var elemTd in lstTdElem)
-                //{
-                //    var t = elemTd.Text + "/" + elemTd.GetAttribute("data-month") + "/" + elemTd.GetAttribute("data-year");
-                //
-                //    if (t.Length > 5)
-                //    {
-                //        textos_tmp.Add(t);
-                //    }
-                //}
-            //}
-
-            // check if dates exists
-            // if doesn't, pick some random one
-
-            // tmp
-            //foreach (var algo in textos_tmp)
-            //{
-                //var _nada = DebugWrite(algo + "\r\n");
-            //}
+        public void ClickSearchFlyButton(int timeout)
+        {
+            string id = "divButtonBuscadorNormal";
+            ClickOnButton(id, timeout);
         }
 
         public void Close()
@@ -122,9 +96,12 @@ namespace TicketVueling.E2E.Test
             this.webDriver.Quit();
         }
 
+
+
         private void ClickPlaceElement(string id_origin_dest, int timeout)
         {
-            this.webDriver.FindElement(By.Id(id_origin_dest)).Click();
+            //this.webDriver.FindElement(By.Id(id_origin_dest)).Click();
+            ClickOnButton(id_origin_dest, timeout);
 
             new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
             .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
@@ -140,7 +117,17 @@ namespace TicketVueling.E2E.Test
             this.webDriver.FindElement(By.Id(id)).SendKeys(Keys.Tab);
         }
 
+        private void ClickOnButton(string id, int timeout)
+        {
+            new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
+            .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(id)));
 
+            webDriver.FindElement(By.Id(id)).Click();
+        }
+
+
+
+        /*
         private static async Task InitDebug()
         {
             await File.WriteAllTextAsync("C:/Users/holacons/Documents/2_QA/1_Examens/finde1/TicketVueling.E2E.Test/salida.txt", "");
@@ -150,6 +137,6 @@ namespace TicketVueling.E2E.Test
         {
             await File.AppendAllTextAsync("C:/Users/holacons/Documents/2_QA/1_Examens/finde1/TicketVueling.E2E.Test/salida.txt", texto);
         }
-
+        */
     }
 }
