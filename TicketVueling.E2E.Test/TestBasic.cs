@@ -24,7 +24,7 @@ namespace TicketVueling.E2E.Test
         public void RoundTripPurchase()
         {
             basicTest.AcceptCookies(2);
-            basicTest.SelectTripOption(Generics.Trip.MULTIPLE, 4);
+            basicTest.SelectTripOption(Generics.Trip.ROUNDTRIP, 4);
             
             basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
             basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
@@ -34,6 +34,8 @@ namespace TicketVueling.E2E.Test
             
             basicTest.ClickSearchFlyButton(4);
             
+            //check if tickets are available, if not, keep pressing next day
+
             //choose the first origin fly
             //choose the first destiny fly
             //select basic option
