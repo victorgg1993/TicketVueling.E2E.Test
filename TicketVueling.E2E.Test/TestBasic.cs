@@ -34,9 +34,6 @@ namespace TicketVueling.E2E.Test
 
             basicTest.ClickSearchFlyButton(4);
 
-            // check if tickets are available, if not, keep pressing next day
-            //basicTest.fixPossibleUnavailableFly(4);
-
             int originPrice = basicTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
             basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
 
@@ -50,17 +47,31 @@ namespace TicketVueling.E2E.Test
             //Assert.IsTrue(1==2);
         }
 
-        /*
-            [TestMethod]
-            public void OneWayPurchase()
-            {
-            }
-        */
+        [TestMethod]
+        public void OneWayPurchase()
+        {
+            basicTest.AcceptCookies(2);
+            basicTest.SelectTripOption(Generics.Trip.ONEWAY, 4);
+
+            basicTest.ChooseNumberOfAdults(2, 4);
+
+            basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
+            basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
+
+            basicTest.ChooseDate(Generics.Place.ORIGIN, "30/07/21", 4);
+            basicTest.ClickSearchFlyButton(4);
+
+            int originPrice = basicTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
+            basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+
+            basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
+            basicTest.ClickContinueButton(15);
+        }
 
         [TestCleanup]
         public void TearDown()
         {
-            //basicTest.Close();
+            basicTest.Close();
         }
     }
 }

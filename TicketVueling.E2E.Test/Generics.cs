@@ -180,6 +180,20 @@ namespace TicketVueling.E2E.Test
             return 0;
         }
 
+        public void ChooseNumberOfAdults(int num, int timeout)
+        {
+            num = (num-1) % 3; // temporary limiter
+
+            string[] id =
+            {
+                "DropDownListPassengerType_ADT_1",
+                "DropDownListPassengerType_ADT_2",
+                "DropDownListPassengerType_ADT_3"
+            };
+
+            this.webDriver.FindElement(By.Id(id[num])).Click();
+        }
+
         public void Close()
         {
             this.webDriver.Close();
