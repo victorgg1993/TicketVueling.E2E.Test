@@ -54,6 +54,7 @@ namespace TicketVueling.E2E.Test
             basicTest.SelectTripOption(Generics.Trip.ONEWAY, 4);
 
             basicTest.ChooseNumberOfAdults(2, 4);
+            basicTest.ChooseNumberOfKids(1, 4);
 
             basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
             basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
