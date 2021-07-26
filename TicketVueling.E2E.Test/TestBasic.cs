@@ -25,20 +25,21 @@ namespace TicketVueling.E2E.Test
         {
             basicTest.AcceptCookies(2);
             basicTest.SelectTripOption(Generics.Trip.ROUNDTRIP, 4);
-            
+
             basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
             basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
-            
+
             basicTest.ChooseDate(Generics.Place.ORIGIN, "30/07/21", 4);
             basicTest.ChooseDate(Generics.Place.DESTINATION, "26/08/21", 4);
-            
+
             basicTest.ClickSearchFlyButton(4);
-            
+
             // check if tickets are available, if not, keep pressing next day
             //basicTest.fixPossibleUnavailableFly(4);
 
-            //choose the first origin fly
-            //choose the first destiny fly
+            basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+            basicTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
+
             //select basic option
             //click continue button
             //check the price
