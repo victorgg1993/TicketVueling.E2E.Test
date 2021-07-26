@@ -41,7 +41,7 @@ namespace TicketVueling.E2E.Test
             basicTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
 
             //select basic option
-            basicTest.SelectPlanOption(Generics.PLan.BASIC, 4);
+            basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
 
             //click continue button
             //check the price
