@@ -29,13 +29,13 @@ namespace TicketVueling.E2E.Test
             basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
             basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
             
-            basicTest.ChooseDate(Generics.Place.ORIGIN, "22/09/21", 4);
-            basicTest.ChooseDate(Generics.Place.DESTINATION, "25/09/21", 4);
+            basicTest.ChooseDate(Generics.Place.ORIGIN, "30/07/21", 4);
+            basicTest.ChooseDate(Generics.Place.DESTINATION, "26/08/21", 4);
             
             basicTest.ClickSearchFlyButton(4);
-
-            basicTest.fixPossibleUnavailableFly(4);
-            //check if tickets are available, if not, keep pressing next day
+            
+            // check if tickets are available, if not, keep pressing next day
+            //basicTest.fixPossibleUnavailableFly(4);
 
             //choose the first origin fly
             //choose the first destiny fly
