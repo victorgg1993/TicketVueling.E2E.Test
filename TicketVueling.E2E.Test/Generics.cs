@@ -165,6 +165,15 @@ namespace TicketVueling.E2E.Test
             radio_buttons[(int)option_plan].Click();
         }
 
+        public void ClickContinueButton(int timeout)
+        {
+            this.webDriver.FindElement(By.Id("stvContinueButton")).Click();
+
+            new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
+            .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
+            .ElementIsVisible(By.Id("contactAside")));
+        }
+
         public void Close()
         {
             this.webDriver.Close();
