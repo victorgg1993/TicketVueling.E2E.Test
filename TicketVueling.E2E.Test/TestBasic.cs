@@ -38,13 +38,15 @@ namespace TicketVueling.E2E.Test
             //basicTest.fixPossibleUnavailableFly(4);
 
             basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+            int originPrice = basicTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
+
             basicTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
+            int destinationPrice = basicTest.GetFlyTicketPrice(Generics.Place.DESTINATION, 4);
 
             basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
+            basicTest.ClickContinueButton(15);
 
-            basicTest.ClickContinueButton(4);
             //check the price
-
             //Assert.IsTrue(1==2);
         }
 
