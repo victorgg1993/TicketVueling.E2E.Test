@@ -102,7 +102,7 @@ namespace TicketVueling.E2E.Test
             this.webDriver.FindElement(By.XPath(xPath)).Click();
         }
 
-        public void fixPossibleUnavailableFly(int timeout) // working
+        public void fixPossibleUnavailableFly(int timeout)
         {
             //-------------------<temporal>
             //Thread.Sleep(1000);
@@ -117,14 +117,33 @@ namespace TicketVueling.E2E.Test
             //{
             //if (alertUp.Displayed)
             //{
-                // agafar la id="tabDay" aria-selected="true" i fer click en la següent
+            // agafar la id="tabDay" aria-selected="true" i fer click en la següent
             //}
 
             //if (alertDown.Displayed)
             //{
-                // agafar la id="tabDay" aria-selected="true" i fer click en la següent
+            // agafar la id="tabDay" aria-selected="true" i fer click en la següent
             //}
             //}
+        }
+
+        public void ChooseFlyTicket(Place origin_dest, int timeout)
+        {
+            int index_pos = 0;
+            string classString = "";
+            string xpath = "//div/label/div[2]/div[1]/div";
+
+            while (!classString.Contains("hidden")) // while page is loading, wait;
+            {
+                classString = this.webDriver.FindElement(By.Id("vy-stv-loader")).GetAttribute("class");
+            }
+
+            if (origin_dest == Place.DESTINATION) // pick the last one if destination is chosen
+            {
+                index_pos = this.webDriver.FindElements(By.XPath(xpath)).Count - 1;
+            }
+
+            this.webDriver.FindElements(By.XPath(xpath))[index_pos].Click();
         }
 
         public void Close()
