@@ -67,6 +67,7 @@ namespace TicketVueling.E2E.Test
 
             basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
             basicTest.ClickContinueButton(15);
+
         }
 
         [TestCleanup]
