@@ -174,6 +174,12 @@ namespace TicketVueling.E2E.Test
             .ElementIsVisible(By.Id("contactAside")));
         }
 
+        public int GetFlyTicketPrice(Place origin_test, int timeout)
+        {
+
+            return 0;
+        }
+
         public void Close()
         {
             this.webDriver.Close();
