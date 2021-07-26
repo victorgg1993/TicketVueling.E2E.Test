@@ -37,11 +37,11 @@ namespace TicketVueling.E2E.Test
             // check if tickets are available, if not, keep pressing next day
             //basicTest.fixPossibleUnavailableFly(4);
 
-            basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
             int originPrice = basicTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
+            basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
 
-            basicTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
             int destinationPrice = basicTest.GetFlyTicketPrice(Generics.Place.DESTINATION, 4);
+            basicTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
 
             basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
             basicTest.ClickContinueButton(15);
