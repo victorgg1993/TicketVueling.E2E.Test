@@ -56,10 +56,10 @@ namespace TicketVueling.E2E.Test
             basicTest.ChooseNumberOfAdults(2, 4);
             basicTest.ChooseNumberOfKids(1, 4);
 
-            basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
-            basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
+            basicTest.ChoosePlace(Generics.Place.ORIGIN, "Ancona", 4);
+            basicTest.ChoosePlace(Generics.Place.DESTINATION, "Burdeos", 4);
 
-            basicTest.ChooseDate(Generics.Place.ORIGIN, "30/07/21", 4);
+            basicTest.ChooseDate(Generics.Place.ORIGIN, "23/8/21", 4);
             basicTest.ClickSearchFlyButton(4);
 
             int originPrice = basicTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
