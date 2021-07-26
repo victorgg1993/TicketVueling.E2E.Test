@@ -182,7 +182,7 @@ namespace TicketVueling.E2E.Test
 
         public void ChooseNumberOfAdults(int num, int timeout)
         {
-            num = (num-1) % 3; // temporary limiter
+            num = (num - 1) % 3; // temporary limiter
 
             string[] id =
             {
@@ -193,7 +193,11 @@ namespace TicketVueling.E2E.Test
 
             this.webDriver.FindElement(By.Id(id[num])).Click();
         }
-
+        public void ChooseNumberOfKids(int num, int timeout)
+        {
+            string xPath = $"//select[@id='AvailabilitySearchInputSearchView_DropDownListPassengerType_CHD']/option[@value='{num}']";
+            this.webDriver.FindElement(By.XPath(xPath)).Click();
+        }
         public void Close()
         {
             this.webDriver.Close();
