@@ -40,10 +40,9 @@ namespace TicketVueling.E2E.Test
             basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
             basicTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
 
-            //select basic option
             basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
 
-            //click continue button
+            basicTest.ClickContinueButton(4);
             //check the price
 
             //Assert.IsTrue(1==2);
