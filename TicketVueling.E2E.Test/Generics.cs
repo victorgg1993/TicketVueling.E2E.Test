@@ -32,6 +32,13 @@ namespace TicketVueling.E2E.Test
             XPATH,
         };
 
+        public enum Plan
+        {
+            BASIC = 0,
+            OPTIMA,
+            TIMEFLEX,
+        };
+
 
         public Generics(string url, IWebDriver webDriver)
         {
@@ -96,10 +103,13 @@ namespace TicketVueling.E2E.Test
 
         public void ClickSearchFlyButton(int timeout)
         {
-            //Thread.Sleep(3000);
             //ClickOnButton("divButtonBuscadorNormal", timeout);
-            string xPath = "//div[@id='divButtonBuscadorNormal']/a";
-            this.webDriver.FindElement(By.XPath(xPath)).Click();
+            //string xPath = "//div[@id='divButtonBuscadorNormal']/a";
+            //this.webDriver.FindElements(By.XPath(xPath))[0].Click();
+
+            Thread.Sleep(1500);
+            string id = "AvailabilitySearchInputSearchView_btnClickToSearchNormal";
+            this.webDriver.FindElements(By.Id(id))[0].Click();
         }
 
         public void fixPossibleUnavailableFly(int timeout)
@@ -137,6 +147,8 @@ namespace TicketVueling.E2E.Test
             {
                 classString = this.webDriver.FindElement(By.Id("vy-stv-loader")).GetAttribute("class");
             }
+            Thread.Sleep(400);
+
 
             if (origin_dest == Place.DESTINATION) // pick the last one if destination is chosen
             {
@@ -144,6 +156,13 @@ namespace TicketVueling.E2E.Test
             }
 
             this.webDriver.FindElements(By.XPath(xpath))[index_pos].Click();
+            Thread.Sleep(700);
+        }
+
+        public void SelectPlanOption(Plan option_plan, int timeout)
+        {
+            var radio_buttons = this.webDriver.FindElements(By.ClassName("fares-box_radio"));
+            radio_buttons[(int)option_plan].Click();
         }
 
         public void Close()
