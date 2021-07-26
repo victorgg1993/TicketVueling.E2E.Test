@@ -26,6 +26,13 @@ namespace TicketVueling.E2E.Test
             DESTINATION,
         };
 
+        public enum FindElement
+        {
+            ID = 0,
+            XPATH,
+        };
+
+
         public Generics(string url, IWebDriver webDriver)
         {
             this.webDriver = webDriver;
@@ -47,9 +54,9 @@ namespace TicketVueling.E2E.Test
 
         public void SelectTripOption(Trip n_trip, int timeout)
         {
-            WebDriverWait wait = new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout));
-
             string id = "radiosBuscador";
+
+            WebDriverWait wait = new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(By.Id(id)));
 
             var radioButtons = this.webDriver.FindElements(By.ClassName("elForm_radio--label"));
@@ -74,20 +81,50 @@ namespace TicketVueling.E2E.Test
 
         public void ChooseDate(Place origin_destin, string date, int timeout)
         {
-            // temporary disabled, it just closes the date pop-up
-            // and picks the default dates
+            String[] dateParts = date.Split("/");
             string id = "datePickerTitleCloseButton";
-            new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
-            .Until(SeleniumExtras.WaitHelpers.ExpectedConditions
-            .ElementIsVisible(By.Id(id)));
+            string xpath = ($"//tbody/tr/td[@data-month='{ int.Parse(dateParts[1]) - 1}'][a = '{dateParts[0]}']");
 
-            webDriver.FindElement(By.Id(id)).Click();
+            Thread.Sleep(700);
+
+            new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
+            .Until(SeleniumExtras.WaitHelpers
+            .ExpectedConditions.ElementIsVisible(By.Id(id)));
+
+            webDriver.FindElement(By.XPath(xpath)).Click();
         }
 
         public void ClickSearchFlyButton(int timeout)
         {
-            string id = "divButtonBuscadorNormal";
-            ClickOnButton(id, timeout);
+            //Thread.Sleep(3000);
+            //ClickOnButton("divButtonBuscadorNormal", timeout);
+            string xPath = "//div[@id='divButtonBuscadorNormal']/a";
+            this.webDriver.FindElement(By.XPath(xPath)).Click();
+        }
+
+        public void fixPossibleUnavailableFly(int timeout) // working
+        {
+            //-------------------<temporal>
+            //Thread.Sleep(1000);
+            //string text = "//div[@id='menuTop']/a";
+            //webDriver.FindElement(By.XPath(text)).Click();
+            //-------------------</temporal>
+
+            //var alertUp = this.webDriver.FindElement(By.XPath("//div[4]/div/div[2]/div[@id='flightCardsContainer']/div[@id='alertMessageNoFlight']"));
+            //var alertDown = this.webDriver.FindElement(By.XPath("//div[5]/div/div[2]/div[@id='flightCardsContainer']/div[@id='alertMessageNoFlight']"));
+
+            //while (alertUp.Displayed || alertDown.Displayed)
+            //{
+            //if (alertUp.Displayed)
+            //{
+                // agafar la id="tabDay" aria-selected="true" i fer click en la següent
+            //}
+
+            //if (alertDown.Displayed)
+            //{
+                // agafar la id="tabDay" aria-selected="true" i fer click en la següent
+            //}
+            //}
         }
 
         public void Close()
@@ -122,21 +159,8 @@ namespace TicketVueling.E2E.Test
             new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
             .Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(id)));
 
-            webDriver.FindElement(By.Id(id)).Click();
+            this.webDriver.FindElement(By.Id(id)).Click();
         }
-
-
-
-        /*
-        private static async Task InitDebug()
-        {
-            await File.WriteAllTextAsync("C:/Users/holacons/Documents/2_QA/1_Examens/finde1/TicketVueling.E2E.Test/salida.txt", "");
-        }
-
-        private static async Task DebugWrite(string texto)
-        {
-            await File.AppendAllTextAsync("C:/Users/holacons/Documents/2_QA/1_Examens/finde1/TicketVueling.E2E.Test/salida.txt", texto);
-        }
-        */
     }
 }
+
