@@ -12,6 +12,9 @@ namespace TicketVueling.E2E.Test
     public class Generics
     {
         private IWebDriver webDriver;
+        public readonly int COOKIE_TIMEOUT = 2; // seconds
+        public readonly int DEFAULT_TIMEOUT = 4; // seconds
+        public readonly int LONG_TIMEOUT = 15; // seconds
 
         public enum Trip
         {
@@ -89,14 +92,14 @@ namespace TicketVueling.E2E.Test
         public void ChooseDate(Place origin_destin, string date, int timeout)
         {
             String[] dateParts = date.Split("/");
-            string id = "datePickerTitleCloseButton";
-            string xpath = ($"//tbody/tr/td[@data-month='{ int.Parse(dateParts[1]) - 1}'][a = '{dateParts[0]}']");
+            int dateDay = int.Parse(dateParts[0]);
+            int dateMonth = int.Parse(dateParts[1]) - 1;
 
-            Thread.Sleep(700);
+            string xpath = ($"//tbody/tr/td[@data-month='{dateMonth}'][a='{dateDay}']");
 
             new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
             .Until(SeleniumExtras.WaitHelpers
-            .ExpectedConditions.ElementIsVisible(By.Id(id)));
+            .ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
 
             webDriver.FindElement(By.XPath(xpath)).Click();
         }
