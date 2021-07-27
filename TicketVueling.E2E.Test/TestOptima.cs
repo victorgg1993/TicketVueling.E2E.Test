@@ -7,72 +7,86 @@ using OpenQA.Selenium.Support.UI;
 
 namespace TicketVueling.E2E.Test
 {
-    [TestClass]
+    //[TestClass]
     public class TestOptima
     {
         static IWebDriver driver = new ChromeDriver();
         static string url = "https://tickets.vueling.com/";
 
-        Generics optimaTest = new Generics(url, driver);
+        Generics test = new Generics(url, driver);
 
-        [ClassInitialize]
+        //[ClassInitialize]
         public static void TestSetup(TestContext context)
         {
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void RoundTripPurchase()
         {
-            optimaTest.AcceptCookies(2);
-            optimaTest.SelectTripOption(Generics.Trip.ROUNDTRIP, 4);
+            const string placeOrigin = "Barcelona";
+            const string placeDestination = "Tel Aviv";
 
-            optimaTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
-            optimaTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
+            const string dateOrigin = "30/07/21";
+            const string dateDestination = "26/08/21";
 
-            optimaTest.ChooseDate(Generics.Place.ORIGIN, "30/07/21", 4);
-            optimaTest.ChooseDate(Generics.Place.DESTINATION, "26/08/21", 4);
+            test.AcceptCookies(2);
+            test.SelectTripOption(Generics.Trip.ROUNDTRIP, test.DEFAULT_TIMEOUT);
 
-            optimaTest.ClickSearchFlyButton(4);
+            test.ChoosePlace(Generics.Place.ORIGIN, placeOrigin, test.DEFAULT_TIMEOUT);
+            test.ChoosePlace(Generics.Place.DESTINATION, placeDestination, test.DEFAULT_TIMEOUT);
 
-            int originPrice = optimaTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
-            optimaTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+            test.ChooseDate(Generics.Place.ORIGIN, dateOrigin, test.DEFAULT_TIMEOUT);
+            test.ChooseDate(Generics.Place.DESTINATION, dateDestination, test.DEFAULT_TIMEOUT);
 
-            int destinationPrice = optimaTest.GetFlyTicketPrice(Generics.Place.DESTINATION, 4);
-            optimaTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
+            test.ClickSearchFlyButton(test.DEFAULT_TIMEOUT);
 
-            optimaTest.SelectPlanOption(Generics.Plan.OPTIMA, 4);
-            optimaTest.ClickContinueButton(15);
+            int originPrice = test.GetFlyTicketPrice(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+
+            int destinationPrice = test.GetFlyTicketPrice(Generics.Place.DESTINATION, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.DESTINATION, test.DEFAULT_TIMEOUT);
+
+            test.SelectPlanOption(Generics.Plan.OPTIMA, test.DEFAULT_TIMEOUT);
+            test.ClickContinueButton(test.LONG_TIMEOUT);
 
             //check the price
             //Assert.IsTrue(1==2);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void OneWayPurchase()
         {
-            optimaTest.AcceptCookies(2);
-            optimaTest.SelectTripOption(Generics.Trip.ONEWAY, 4);
+            const string placeOrigin = "Ancona";
+            const string placeDestination = "Burdeos";
 
-            optimaTest.ChooseNumberOfAdults(2, 4);
-            optimaTest.ChooseNumberOfKids(1, 4);
+            const string dateOrigin = "30/8/21";
 
-            optimaTest.ChoosePlace(Generics.Place.ORIGIN, "Ancona", 4);
-            optimaTest.ChoosePlace(Generics.Place.DESTINATION, "Burdeos", 4);
+            test.AcceptCookies(test.COOKIE_TIMEOUT);
+            test.SelectTripOption(Generics.Trip.ONEWAY, test.DEFAULT_TIMEOUT);
 
-            optimaTest.ChooseDate(Generics.Place.ORIGIN, "23/8/21", 4);
-            optimaTest.ClickSearchFlyButton(4);
+            test.ChooseNumberOfAdults(2, test.DEFAULT_TIMEOUT);
+            test.ChooseNumberOfKids(1, test.DEFAULT_TIMEOUT);
 
-            int originPrice = optimaTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
-            optimaTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+            test.ChoosePlace(Generics.Place.ORIGIN, placeOrigin, test.DEFAULT_TIMEOUT);
+            test.ChoosePlace(Generics.Place.DESTINATION, placeDestination, test.DEFAULT_TIMEOUT);
 
-            optimaTest.SelectPlanOption(Generics.Plan.OPTIMA, 4);
-            optimaTest.ClickContinueButton(15);
+            test.ChooseDate(Generics.Place.ORIGIN, dateOrigin, test.DEFAULT_TIMEOUT);
+            test.ClickSearchFlyButton(test.DEFAULT_TIMEOUT);
+
+            int originPrice = test.GetFlyTicketPrice(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+
+            test.SelectPlanOption(Generics.Plan.OPTIMA, test.DEFAULT_TIMEOUT);
+            test.ClickContinueButton(test.LONG_TIMEOUT);
+
+            //check the price
+            //Assert.IsTrue(1==2);
         }
 
-        [TestCleanup]
+        //[TestCleanup]
         public void TearDown()
         {
-            optimaTest.Close();
+            test.Close();
         }
     }
 }

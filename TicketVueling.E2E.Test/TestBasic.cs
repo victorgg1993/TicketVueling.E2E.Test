@@ -13,7 +13,7 @@ namespace TicketVueling.E2E.Test
         static IWebDriver driver = new ChromeDriver();
         static string url = "https://tickets.vueling.com/";
 
-        Generics basicTest = new Generics(url, driver);
+        Generics test = new Generics(url, driver);
 
         [ClassInitialize]
         public static void TestSetup(TestContext context)
@@ -23,25 +23,31 @@ namespace TicketVueling.E2E.Test
         [TestMethod]
         public void RoundTripPurchase()
         {
-            basicTest.AcceptCookies(2);
-            basicTest.SelectTripOption(Generics.Trip.ROUNDTRIP, 4);
+            const string placeOrigin = "Barcelona";
+            const string placeDestination = "Tel Aviv";
 
-            basicTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
-            basicTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
+            const string dateOrigin = "30/07/21";
+            const string dateDestination = "26/08/21";
 
-            basicTest.ChooseDate(Generics.Place.ORIGIN, "30/07/21", 4);
-            basicTest.ChooseDate(Generics.Place.DESTINATION, "26/08/21", 4);
+            test.AcceptCookies(test.COOKIE_TIMEOUT);
+            test.SelectTripOption(Generics.Trip.ROUNDTRIP, test.DEFAULT_TIMEOUT);
 
-            basicTest.ClickSearchFlyButton(4);
+            test.ChoosePlace(Generics.Place.ORIGIN, placeOrigin, test.DEFAULT_TIMEOUT);
+            test.ChoosePlace(Generics.Place.DESTINATION, placeDestination, test.DEFAULT_TIMEOUT);
 
-            int originPrice = basicTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
-            basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+            test.ChooseDate(Generics.Place.ORIGIN, dateOrigin, test.DEFAULT_TIMEOUT);
+            test.ChooseDate(Generics.Place.DESTINATION, dateDestination, test.DEFAULT_TIMEOUT);
 
-            int destinationPrice = basicTest.GetFlyTicketPrice(Generics.Place.DESTINATION, 4);
-            basicTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
+            test.ClickSearchFlyButton(test.DEFAULT_TIMEOUT);
 
-            basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
-            basicTest.ClickContinueButton(15);
+            int originPrice = test.GetFlyTicketPrice(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+
+            int destinationPrice = test.GetFlyTicketPrice(Generics.Place.DESTINATION, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.DESTINATION, test.DEFAULT_TIMEOUT);
+
+            test.SelectPlanOption(Generics.Plan.BASIC, test.DEFAULT_TIMEOUT);
+            test.ClickContinueButton(test.LONG_TIMEOUT);
 
             //check the price
             //Assert.IsTrue(1==2);
@@ -50,30 +56,34 @@ namespace TicketVueling.E2E.Test
         [TestMethod]
         public void OneWayPurchase()
         {
-            basicTest.AcceptCookies(2);
-            basicTest.SelectTripOption(Generics.Trip.ONEWAY, 4);
+            const string placeOrigin = "Ancona";
+            const string placeDestination = "Burdeos";
 
-            basicTest.ChooseNumberOfAdults(2, 4);
-            basicTest.ChooseNumberOfKids(1, 4);
+            const string dateOrigin = "23/8/21";
 
-            basicTest.ChoosePlace(Generics.Place.ORIGIN, "Ancona", 4);
-            basicTest.ChoosePlace(Generics.Place.DESTINATION, "Burdeos", 4);
+            test.AcceptCookies(test.COOKIE_TIMEOUT);
+            test.SelectTripOption(Generics.Trip.ONEWAY, test.DEFAULT_TIMEOUT);
 
-            basicTest.ChooseDate(Generics.Place.ORIGIN, "23/8/21", 4);
-            basicTest.ClickSearchFlyButton(4);
+            test.ChooseNumberOfAdults(2, test.DEFAULT_TIMEOUT);
+            test.ChooseNumberOfKids(1, test.DEFAULT_TIMEOUT);
 
-            int originPrice = basicTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
-            basicTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+            test.ChoosePlace(Generics.Place.ORIGIN, placeOrigin, test.DEFAULT_TIMEOUT);
+            test.ChoosePlace(Generics.Place.DESTINATION, placeDestination, test.DEFAULT_TIMEOUT);
 
-            basicTest.SelectPlanOption(Generics.Plan.BASIC, 4);
-            basicTest.ClickContinueButton(15);
+            test.ChooseDate(Generics.Place.ORIGIN, dateOrigin, test.DEFAULT_TIMEOUT);
+            test.ClickSearchFlyButton(test.DEFAULT_TIMEOUT);
 
+            int originPrice = test.GetFlyTicketPrice(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+
+            test.SelectPlanOption(Generics.Plan.BASIC, test.DEFAULT_TIMEOUT);
+            test.ClickContinueButton(test.LONG_TIMEOUT);
         }
 
         [TestCleanup]
         public void TearDown()
         {
-            basicTest.Close();
+            test.Close();
         }
     }
 }

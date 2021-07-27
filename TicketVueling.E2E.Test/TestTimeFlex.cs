@@ -7,50 +7,56 @@ using OpenQA.Selenium.Support.UI;
 
 namespace TicketVueling.E2E.Test
 {
-    [TestClass]
+    //[TestClass]
     public class TestTimeFlex
     {
         static IWebDriver driver = new ChromeDriver();
         static string url = "https://tickets.vueling.com/";
 
-        Generics timeFlexTest = new Generics(url, driver);
+        readonly string placeOrigin = "Barcelona";
+        readonly string placeDestination = "Tel Aviv";
 
-        [ClassInitialize]
+        readonly string dateOrigin = "30/07/21";
+        readonly string dateDestination = "26/08/21";
+
+        Generics test = new Generics(url, driver);
+
+        //[ClassInitialize]
         public static void TestSetup(TestContext context)
         {
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void RoundTripPurchase()
         {
-            timeFlexTest.AcceptCookies(2);
-            timeFlexTest.SelectTripOption(Generics.Trip.ROUNDTRIP, 4);
+            test.AcceptCookies(test.COOKIE_TIMEOUT);
+            test.SelectTripOption(Generics.Trip.ROUNDTRIP, test.DEFAULT_TIMEOUT);
 
-            timeFlexTest.ChoosePlace(Generics.Place.ORIGIN, "Barcelona", 4);
-            timeFlexTest.ChoosePlace(Generics.Place.DESTINATION, "Tel Aviv", 4);
+            test.ChoosePlace(Generics.Place.ORIGIN, placeOrigin, test.DEFAULT_TIMEOUT);
+            test.ChoosePlace(Generics.Place.DESTINATION, placeDestination, test.DEFAULT_TIMEOUT);
 
-            timeFlexTest.ChooseDate(Generics.Place.ORIGIN, "30/07/21", 4);
-            timeFlexTest.ChooseDate(Generics.Place.DESTINATION, "26/08/21", 4);
+            test.ChooseDate(Generics.Place.ORIGIN, dateOrigin, test.DEFAULT_TIMEOUT);
+            test.ChooseDate(Generics.Place.DESTINATION, dateDestination, test.DEFAULT_TIMEOUT);
 
-            timeFlexTest.ClickSearchFlyButton(4);
+            test.ClickSearchFlyButton(test.DEFAULT_TIMEOUT);
 
-            int originPrice = timeFlexTest.GetFlyTicketPrice(Generics.Place.ORIGIN, 4);
-            timeFlexTest.ChooseFlyTicket(Generics.Place.ORIGIN, 4);
+            int originPrice = test.GetFlyTicketPrice(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.ORIGIN, test.DEFAULT_TIMEOUT);
 
-            int destinationPrice = timeFlexTest.GetFlyTicketPrice(Generics.Place.DESTINATION, 4);
-            timeFlexTest.ChooseFlyTicket(Generics.Place.DESTINATION, 4);
+            int destinationPrice = test.GetFlyTicketPrice(Generics.Place.DESTINATION, test.DEFAULT_TIMEOUT);
+            test.ChooseFlyTicket(Generics.Place.DESTINATION, test.DEFAULT_TIMEOUT);
 
-            timeFlexTest.SelectPlanOption(Generics.Plan.OPTIMA, 4);
-            timeFlexTest.ClickContinueButton(15);
+            test.SelectPlanOption(Generics.Plan.OPTIMA, test.DEFAULT_TIMEOUT);
+            test.ClickContinueButton(test.LONG_TIMEOUT);
 
             //check the price
             //Assert.IsTrue(1==2);
         }
 
-        [TestCleanup]
+        //[TestCleanup]
         public void TearDown()
         {
-            timeFlexTest.Close();
+            test.Close();
         }
     }
 }
