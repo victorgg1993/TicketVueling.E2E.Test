@@ -53,7 +53,7 @@ namespace TicketVueling.E2E.Test
             //Assert.IsTrue(1==2);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void OneWayPurchase()
         {
             const string placeOrigin = "Ancona";

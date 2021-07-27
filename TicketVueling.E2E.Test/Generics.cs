@@ -95,14 +95,11 @@ namespace TicketVueling.E2E.Test
             int dateDay = int.Parse(dateParts[0]);
             int dateMonth = int.Parse(dateParts[1]) - 1;
 
-            string id = "datePickerTitleCloseButton";
             string xpath = ($"//tbody/tr/td[@data-month='{dateMonth}'][a='{dateDay}']");
-
-            Thread.Sleep(700);
 
             new WebDriverWait(this.webDriver, TimeSpan.FromSeconds(timeout))
             .Until(SeleniumExtras.WaitHelpers
-            .ExpectedConditions.ElementIsVisible(By.Id(id)));
+            .ExpectedConditions.ElementToBeClickable(By.XPath(xpath)));
 
             webDriver.FindElement(By.XPath(xpath)).Click();
         }
